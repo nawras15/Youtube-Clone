@@ -3,7 +3,7 @@
 A fully responsive YouTube clone application built using modern web technologies. This project fetches real-time data from the official YouTube Data API v3.
 
 ## 🚀 Live Demo
-[View Live Project Here](https://soft-pavlova-76d3bc.netlify.app/)
+[View Live Project Here](https://nawras-wadi-youtube.netlify.app)
 
 ## ✨ Features
 - **Real-time Data:** Fetches trending videos, comments, and suggestions from YouTube.
