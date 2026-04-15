@@ -31,8 +31,8 @@ A fully responsive YouTube clone application built using modern web technologies
 
 ### 📱 Mobile View & Responsive Design
 <div align="center">
-  <img src="screenshots/mobile%20home%20page.png" width="30%" alt="Mobile Home" />
-  <img src="screenshots/mobile-darkmode.png" width="30%" alt="Mobile Dark" />
+  <img src="screenshots/mobile%20home%20page.jpeg" width="30%" alt="Mobile Home" />
+  <img src="screenshots/mobile-darkmode.jpeg" width="30%" alt="Mobile Dark" />
 </div>
 
 <br />
