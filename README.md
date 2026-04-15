@@ -20,7 +20,34 @@ A fully responsive YouTube clone application built using modern web technologies
 - **YouTube Data API v3** (Data Source)
 
 ## 📸 Screenshots
-*(Coming Soon - You can add your screenshots here later)*
+
+### 🖥️ Desktop Experience (Light & Dark Mode)
+<div align="center">
+  <img src="screenshots/home%20page.png" width="48%" alt="Home Page Light" />
+  <img src="screenshots/home%20page%20darkmode.png" width="48%" alt="Home Page Dark" />
+</div>
+
+<br />
+
+### 📱 Mobile View & Responsive Design
+<div align="center">
+  <img src="screenshots/mobile%20home%20page.png" width="30%" alt="Mobile Home" />
+  <img src="screenshots/mobile-darkmode.png" width="30%" alt="Mobile Dark" />
+</div>
+
+<br />
+
+### 🚀 Key Features Highlights
+<div align="center">
+  <img src="screenshots/Video%20Categories.png" width="48%" alt="Video Categories" />
+  <img src="screenshots/Video%20Categories%20darkmode.png" width="48%" alt="Categories Dark" />
+</div>
+
+<div align="center" style="margin-top: 10px;">
+  <img src="screenshots/Text%20Search%20Functionality.png" width="31%" alt="Search" />
+  <img src="screenshots/Suggested%20Videos.png" width="31%" alt="Suggested" />
+  <img src="screenshots/Real-time%20Comments.png" width="31%" alt="Comments" />
+</div>
 
 ## 💡 Learning Outcomes
 Through this project, I mastered:
