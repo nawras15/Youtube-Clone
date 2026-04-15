@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>youtube clone</title>
+     <script src="https://cdn.tailwindcss.com"></script>
+      <script>
+        tailwind.config = {
+            darkMode: 'class', // تفعيل الوضع الليلي بالكلاس
+        }
+    </script>
+</head>
+<body class="bg-white text-black dark:bg-[#0f0f0f] dark:text-white transition-colors duration-300">
+  <!-- ml-0 للموبايل | md:ml-20 للشاشات الكبيرة (يساوي عرض الميني سايدبار) -->
+<main class="pt-14 md:ml-20 transition-all duration-300 min-h-screen pb-24">
+    <!-- حاوية المحتوى الداخلي مع بادينج (Padding) مناسب -->
+    <div class="p-4 md:p-6 max-w-[1600px] mx-auto">
+        
+        <!-- هنا نضع شريط التصنيفات وشبكة الفيديوهات -->
+        
+ 
+  <!-- شريط التصنيفات -->
+<div class="sticky top-14 z-20 bg-white dark:bg-[#0f0f0f] py-3 overflow-x-auto no-scrollbar flex gap-3 px-4 border-b dark:border-zinc-800">
+    <button class="category-chip whitespace-nowrap bg-black dark:bg-white text-white dark:text-black px-3 py-1 rounded-lg text-sm font-medium">الكل</button>
+    <button class="category-chip whitespace-nowrap bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 px-3 py-1 rounded-lg text-sm font-medium">موسيقى</button>
+    <button class="category-chip whitespace-nowrap bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 px-3 py-1 rounded-lg text-sm font-medium">ألعاب فيديو</button>
+    <button class="category-chip whitespace-nowrap bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 px-3 py-1 rounded-lg text-sm font-medium">بث مباشر</button>
+    <button class="category-chip whitespace-nowrap bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 px-3 py-1 rounded-lg text-sm font-medium">أخبار</button>
+    <button class="category-chip whitespace-nowrap bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 px-3 py-1 rounded-lg text-sm font-medium">رياضة</button>
+    <button class="category-chip whitespace-nowrap bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 px-3 py-1 rounded-lg text-sm font-medium">برمجة</button>
+</div>
+<!-- شبكة الفيديوهات -->
+<!-- شبكة الفيديوهات ستكون فارغة والجافا سكريبت سيملؤها -->
+<div id="video-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-8 mt-6">
+    <!-- الفيديوهات ستظهر هنا تلقائياً -->
+     
+</div>
+
+</main>
+</div>
+    <nav class="fixed top-0 z-50 w-full bg-white px-4 h-14 flex items-center justify-between dark:bg-[#0f0f0f] dark:text-white">
+  
+  <!-- Left Section: Menu & Logo -->
+  <div class="flex items-center gap-4">
+    <!-- أضفنا id="menu-btn" هنا -->
+    <button id="menu-btn" class="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+    </button>
+    <a href="" class="flex items-center gap-1">
+        <!-- لوجو يوتيوب -->
+        <svg class="w-8 h-6 text-red-600" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        <span class="font-bold text-xl tracking-tighter">YouTube</span>
+    </a>
+</div>
+  <!-- Middle Section: Search Bar -->
+ <!-- القسم الأوسط: شريط البحث والمايك -->
+<div id="search-container" class="hidden md:flex flex-1 justify-center max-w-[720px] ml-10">
+    <div class="flex w-full">
+        <!-- حقل الإدخال -->
+        <div class="flex flex-1 items-center bg-white border border-gray-300 dark:border-zinc-700 dark:bg-zinc-900 rounded-l-full px-4 py-1 ml-4 focus-within:border-blue-500 shadow-inner">
+            <input 
+                id="search-input"
+                type="text" 
+                placeholder="Search" 
+                class="w-full bg-transparent outline-none text-sm placeholder-gray-500 dark:text-white"
+            />
+        </div>
+        <!-- زر البحث (العدسة) -->
+        <button id="search-btn" class="bg-gray-100 dark:bg-zinc-800 border border-l-0 border-gray-300 dark:border-zinc-700 px-5 py-2 rounded-r-full hover:bg-gray-200 transition-all">
+            <svg class="w-5 h-5 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+        </button>
+    </div>
+    <div class="relative flex items-center">
+    <!-- زر المايك -->
+    <button id="voice-search-btn" class="ml-4 p-2 bg-gray-100 dark:bg-zinc-800 hover:bg-gray-200 dark:hover:bg-zinc-700 rounded-full transition-all">
+        <svg class="w-5 h-5 dark:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+    </button>
+    <!-- مؤشر اللغة الصغير -->
+    <span id="lang-indicator" class="absolute -top-2 -right-1 bg-red-600 text-white text-[9px] px-1 rounded cursor-pointer uppercase">AR</span>
+</div>
+
+</div>
+
+<!-- القسم الأيمن: الأيقونات والمستخدم -->
+<div class="flex items-center gap-2 md:gap-4">
+    <!-- أيقونة البحث للموبايل فقط -->
+    <button id="mobile-search-btn" class="md:hidden p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full">
+        <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+    </button>
+    
+    <!-- زر الوضع الليلي (وضعناه هنا ليكون متناسقاً) -->
+    <button id="dark-mode-toggle" class="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full">
+        <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+    </button>
+
+    <button class="p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full hidden sm:block">
+        <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+        </svg>
+    </button>
+    
+    <button class="relative p-2 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-full">
+        <svg class="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+        </svg>
+        <span class="absolute top-1 right-1 bg-red-600 text-white text-[10px] px-1 rounded-full">9+</span>
+    </button>
+    
+    <button class="ml-2 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-medium">
+        NW
+    </button>
+</div>
+
+<!-- القائمة الجانبية -->
+<!-- القائمة الجانبية: أضفنا كلاس -translate-x-full لتبدأ وهي مختفية -->
+<!-- القائمة الجانبية -->
+<div id="sidebar" class="fixed left-0 top-14 h-full w-60 bg-white dark:bg-[#0f0f0f] border-r dark:border-zinc-800 transition-transform duration-300 z-40 shadow-xl -translate-x-full overflow-y-auto pb-20 custom-scrollbar">
+    
+    <!-- القسم الأول: الأساسي -->
+    <div class="p-3 border-b dark:border-zinc-800">
+        <ul class="space-y-1">
+    
+    <!-- أضفنا id="home-nav-btn" و data-page="home" -->
+    <li id="home-nav-btn" data-page="home" class=" sidebar-item flex items-center gap-5 p-2 px-3 bg-gray-100 dark:bg-zinc-800 rounded-lg cursor-pointer">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span class="text-sm font-medium">الرئيسية</span>
+    </li>
+    
+    <!-- أضفنا data-page="shorts" -->
+    <li id="shorts-nav-btn" data-page="shorts" class="sidebar-item flex items-center gap-5 p-2 px-3 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg cursor-pointer">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.75 15L12 13.5V9M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span class="text-sm">Shorts</span>
+    </li>
+        </ul>
+            <li class="flex items-center gap-5 p-2 px-3 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                <span class="text-sm">الاشتراكات</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- القسم الثاني: المكتبة والسجل -->
+    <div class="p-3 border-b dark:border-zinc-800">
+        <h3 class="px-3 py-2 text-sm font-bold">أنت ></h3>
+        <ul class="space-y-1">
+            <li class="flex items-center gap-5 p-2 px-3 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span class="text-sm">السجل</span>
+            </li>
+            <li class="flex items-center gap-5 p-2 px-3 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                <span class="text-sm">فيديوهاتك</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- القسم الثالث: الاشتراكات (قنوات افتراضية) -->
+    <div class="p-3">
+        <h3 class="px-3 py-2 text-sm font-bold">الاشتراكات</h3>
+        <ul class="space-y-1">
+            <li class="flex items-center gap-5 p-2 px-3 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg cursor-pointer">
+                <div class="w-6 h-6 rounded-full bg-yellow-500 flex items-center justify-center text-[10px] text-white">C</div>
+                <span class="text-sm truncate">coding</span>
+            </li>
+            <li class="flex items-center gap-5 p-2 px-3 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg cursor-pointer">
+                <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-[10px] text-white">F</div>
+                <span class="text-sm truncate">front end</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- القائمة المصغرة (تظهر فقط في الشاشات الكبيرة md) -->
+<aside id="mini-sidebar" class="fixed left-0 top-14 h-full w-20 bg-white dark:bg-[#0f0f0f] z-30 hidden md:flex flex-col items-center py-2">
+    <ul class="w-full space-y-1">
+        <li class=" flex flex-col items-center gap-1 p-3 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg cursor-pointer">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            <span class="text-[10px]">الرئيسية</span>
+        </li>
+        <li class=" flex flex-col items-center gap-1 p-3 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg cursor-pointer">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.75 15L12 13.5V9M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span class="text-[10px]">Shorts</span>
+        </li>
+        <li class="flex flex-col items-center gap-1 p-3 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg cursor-pointer">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+            <span class="text-[10px]">الاشتراكات</span>
+        </li>
+        <li class="flex flex-col items-center gap-1 p-3 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg cursor-pointer">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span class="text-[10px]">أنت</span>
+        </li>
+    </ul>
+</aside>
+<!-- منطقة المحتوى الرئيسي -->
+<main id="main-content" class="pt-20 md:ml-20 transition-all duration-300 p-4">
+    <div id="categories-bar" class="sticky top-14 z-20 bg-white dark:bg-[#0f0f0f] ... flex gap-3 overflow-x-auto">
+        <!-- أزرار التصنيفات هنا -->
+
+    </div>
+    <!-- شبكة الفيديوهات العادية -->
+    <div id="video-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-8 mt-6">
+        <!-- ستملأ بالجافا سكريبت -->
+    </div>
+</main>
+
+<!-- مشغل الفيديو (يبدأ مخفياً) -->
+<!-- صفحة المشاهدة الكاملة -->
+<div id="video-player-container" class="hidden fixed inset-0 z-[100] bg-white dark:bg-[#0f0f0f] flex flex-col items-center overflow-y-auto">
+    
+    <!-- زر العودة -->
+    <div class="w-full max-w-[1500px] flex justify-start p-4">
+        <button onclick="closePlayer()" class="text-red-600 font-bold flex items-center gap-2 hover:bg-gray-100 dark:hover:bg-zinc-800 p-2 rounded-lg transition-all">
+            ✕ العودة للرئيسية
+        </button>
+    </div>
+
+    <!-- الحاوية الرئيسية (فليكس) -->
+    <div class="flex flex-col lg:flex-row gap-6 w-full max-w-[1500px] px-4 md:px-6 pb-20">
+        
+        <!-- القسم الأيسر: (الفيديو + التعليقات) - يأخذ المساحة الأكبر -->
+        <div class="flex-[2.5] w-full"> 
+            <!-- مشغل الفيديو: aspect-video يضمن بقاء النسبة صحيحة مهما كبر الحجم -->
+            <div class="aspect-video w-full rounded-xl overflow-hidden bg-black shadow-2xl">
+                <iframe id="youtube-frame" class="w-full h-full" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            
+            <!-- عنوان الفيديو ومعلومات القناة -->
+            <h2 id="player-title" class="text-xl font-bold dark:text-white mt-4 leading-tight"></h2>
+            
+            <div class="flex items-center gap-4 py-4 mt-2 border-b dark:border-zinc-800">
+                <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-lg">YT</div>
+                <div>
+                    <p id="player-channel" class="font-bold dark:text-white text-base"></p>
+                    <p class="text-xs text-gray-500">1.5M مشترك</p>
+                </div>
+                <button class="bg-black text-white dark:bg-white dark:text-black px-6 py-2 rounded-full text-sm font-bold mr-auto">اشتراك</button>
+            </div>
+
+            <!-- قسم التعليقات (تحت الفيديو مباشرة) -->
+            <div class="mt-8">
+                <h3 id="comments-count" class="font-bold dark:text-white mb-6 text-lg">التعليقات</h3>
+                <div id="comments-container" class="flex flex-col gap-6">
+                    <!-- التعليقات ستظهر هنا -->
+                </div>
+            </div>
+        </div>
+
+        <!-- القسم الأيمن: (المقترحات) - يأخذ مساحة جانبية محددة -->
+        <div class="flex-1 w-full lg:max-w-[400px]">
+            <h3 class="font-bold mb-4 dark:text-white border-b dark:border-zinc-800 pb-2">فيديوهات مقترحة</h3>
+            <div id="suggested-videos" class="flex flex-col gap-4">
+                 <!-- الفيديوهات المقترحة ستظهر هنا -->
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- الناف بار السفلي للموبايل (يظهر فقط في الشاشات أقل من md) -->
+<div class="md:hidden fixed bottom-0 left-0 w-full bg-white dark:bg-[#0f0f0f] border-t border-gray-200 dark:border-zinc-800 flex justify-around items-center h-16 z-[100] px-2 pb-safe shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+    <!-- زر الرئيسية -->
+    <button onclick="location.reload()" class="flex flex-col items-center gap-1 flex-1 text-black dark:text-white">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span class="text-[10px]">الرئيسية</span>
+    </button>
+
+    <!-- زر Shorts (منظر حالياً) -->
+    <div class="flex flex-col items-center gap-1 flex-1 text-gray-500 dark:text-zinc-400">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.75 15L12 13.5V9M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span class="text-[10px]">Shorts</span>
+    </div>
+
+    <!-- زر الإضافة -->
+    <div class="flex flex-col items-center flex-1 text-black dark:text-white">
+        <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+    </div>
+
+    <!-- زر الاشتراكات -->
+    <div class="flex flex-col items-center gap-1 flex-1 text-gray-500 dark:text-zinc-400">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+        <span class="text-[10px]">الاشتراكات</span>
+    </div>
+
+    <!-- زر الملف الشخصي -->
+    <div class="flex flex-col items-center gap-1 flex-1 text-gray-500 dark:text-zinc-400">
+        <div class="w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center text-[10px] text-white font-bold">NW</div>
+        <span class="text-[10px]">أنت</span>
+    </div>
+</div>
+
+ <script src="main.js"></script>
+</body>
+</html>
